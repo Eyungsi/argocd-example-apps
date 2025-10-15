@@ -3,12 +3,10 @@ kind: Service
 metadata:
   name: guestbook-ui
   namespace: guestbook-ui
-  annotations:
-    service.beta.kubernetes.io/aws-load-balancer-type: "nlb"  # default on recent EKS, explicit here
 spec:
-  type: LoadBalancer
+  type: ClusterIP
+  selector:
+    app: guestbook-ui
   ports:
     - port: 80
       targetPort: 80
-  selector:
-    app: guestbook-ui
